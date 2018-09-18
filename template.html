@@ -1,36 +1,120 @@
-<h3>Page Heading 1</h3>
+<title>Jquery Tutorial: Load halaman tanpa refresh dengan ajax</title>
 
+<h3>JQuery, javascript yang lebih mudah</h3>
+
+<!--
 <figure class="figure-img">
     <img class="img-responsive" src="./image/path/" alt="">
     <figcaption>Image 1</figcaption>
 </figure>
+-->
 
-<p>text content.</p>
-<p>text content.</p>
-<p>text content.</p>
+<p>
+    Yoo, apa kabar kalian disana??<br>
+    Udah ngopi beloommm hahaha, yups teman setia ngoprek selain sang terkasih ya udah pasti kopi. 
+    Uppss yang ga doyan kopi gmn?? Selama dia ga jomblo sih aman dah, nah kalo jomblo nih lumayan. 
+    Soalnya kalian kudu punya kuota yang banyak biar ga jenuh :D.
+</p>
+<p>
+    Masih inget tutorial javascript yang kemarin? gampang kan? 
+    Sekarang saya mau coba latihan javascript lagi nih, dan pastinya lebih gampang deh. 
+    Kita akan pake framework nya javascript, ssttttt jangan panik gitu baca kata frameworks. 
+    Hahahaa jangan jangan masih belom bisa move on nih abis baca dokumentasi framework php (codeigniter) kemaren. 
+    Ya, untuk framework yang satu ini namanya JQuery, kalian bisa googling sendiri deh di yahoo :p.</p>
+<p>
+    Dengan JQuery kita bisa lebih mudah dalam mengimplementasikan (alah ini ribet amat diejanya) kemampuan dari javascript. 
+    Seperti manipulasi DOM Html, mungkin kalau menggunakan native javascript bakalan lebih pusing hahaha. 
+    Soalnya scriptnya mungkin bakalan lebih banyak dibandingkan menggunakan JQuery
+</p>
 
 <blockquote class="blockquote">
-    text quote
+    what should be simple, let it be simple
 </blockquote>
 
-<p>text content.</p>
-<p>text content.</p>
-<p>text content.</p>
+<h3>Submit data, dan ingin halaman tidak berubah?? lets do it.</h3>
 
-<figure class="figure-img">
-    <img class="img-responsive" src="./image/path" alt="">
-    <figcaption>Image 2</figcaption>
-</figure>
+<p>
+    Javascript sangat erat hubungannya dengan aplikasi berbasis web, apapun bahasa pemrogramman dibelakangnya (server side proccess).
+    Dengan fitur-fitur yang dimilikinya memungkinkan kita melakukan banyak hal terhadap element-element pada form maupun hanya sekedar tulisan (slug title).
+</p>
+<p>
+    Baik kali ini kita akan mencoba untuk melakukan submition pada form tanpa merefresh halaman, alias secara asynchronous. Waduh istilah apaan lagi tuh, hahaha googling sendiri dah ya.
+    Untuk mengetahui hasilnya mending kita langsung praktekin aja.
+    Perhatikan kode berikut. 
+</p>
 
-<p>text content.</p>
-<p>text content.</p>
-<p>text content.</p>
+<!-- tanda ("<") ubah jadi ("&lt;") -->
+<pre class="brush: php">
+    &lt;?php 
+    
+    if(isset($_POST['test'])):
+         die(json_encode($_POST, 128));
+    endif;
 
-<!-- encode html entity before using code highlighter -->
-<pre class="brush: java">
-    Map&lt;String, String> v = new HashMap&lt;String, String>();
+    ?>
+    &lt;form action="" method="POST" id="form">
+        &lt;input name="test">
+        &lt;input name="save" type="submit" value="Save">
+    &lt;/form>
+    &lt;div id="tampung-hasil">&lt;/div>
+    &lt;script type="text/javascript" src="/jquery.js">&lt;/script>
+    &lt;script type="text/javascript">
+        $('#form').on('submit', function(e){
+            e.preventDefault();
+            var data = $(this).serialize();
+            $.ajax({
+                url: '',
+                type: 'POST',
+                data: data,
+                success: function(res) {
+                    console.log(res);
+                }
+            });
+        });
+    &lt;/script>
 </pre>
 
-<p>text content.</p>
-<p>text content.</p>
-<p>text content.</p>
+<p>Buat file baru, lalu beri nama test.php. Selanjutnya buka konsol dan ketikkan perintah berikut</p>
+
+<pre class="brush: bash">
+php -S localhost:7890
+</pre>
+
+<p>lalu akses di browser pada alamat http://localhost:7890/test.php. kurang lebih hasil akhirnya akan seperti berikut.</p>
+
+<figure class="figure-img">
+    <img class="img-responsive" src="./public/uploads/ajax-async.png" alt="">
+    <figcaption>Ajax asynchronous</figcaption>
+</figure>
+
+<p>Pada gambar diatas (result dari ajax tadi), kita mendapatkan response yang berbentuk Object pada javascript. Selanjutnya object tersebut akan kita manipulasi terhadap DOM element (tag div dengan id: tampung-hasil). Kita update kode sebelumnya menjadi seperti berikut.</p>
+<pre class="brush: php">
+    &lt;?php 
+    
+    if(isset($_POST['test'])):
+         die(json_encode($_POST, 128));
+    endif;
+
+    ?>
+    &lt;form action="" method="POST" id="form">
+        &lt;input name="test">
+        &lt;input name="save" type="submit" value="Save">
+    &lt;/form>
+    &lt;div id="tampung-hasil">&lt;/div>
+    &lt;script type="text/javascript" src="/jquery.js">&lt;/script>
+    &lt;script type="text/javascript">
+        $('#form').on('submit', function(e){
+            e.preventDefault();
+            var data = $(this).serialize();
+            $.ajax({
+                url: '',
+                type: 'POST',
+                data: data,
+                success: function(res) {
+                    $('#tampung-hasil').html('Hasil submit form adalah berikut: ' + res.test);
+                }
+            });
+        });
+    &lt;/script>
+</pre>
+<p>Sekian tutorial basic penggunaan ajax pada aplikasi kita, semoga kalian bisa mengerti apa yang aku rasa selama ini setiap kau tak datang sayang padahal aku tak pernah ada dirumah (lohh ini mah lagunya potret) hahaha ketauan tuanya dah. Oke sekian dan terima gaji, salam tempel. </p>
