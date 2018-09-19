@@ -1,36 +1,82 @@
-<h3>Page Heading 1</h3>
+<h3>Syntaxhighlighter, menampilkan barisan kode jadi lebih keren.</h3>
 
-<figure class="figure-img">
-    <img class="img-responsive" src="./image/path/" alt="">
-    <figcaption>Image 1</figcaption>
-</figure>
-
-<p>text content.</p>
-<p>text content.</p>
-<p>text content.</p>
+<p>Yooo, balik lagi nih.</p>
+<p>Gimana kabar kalian? semoga selalu dalam perlingungan-Nya, Amin. Iseng juga nih sore-sore pengen nyemil, hahaha malah curhat. Tapi emang bener kok, sore gini emang jamnya nyemil. Tau cilor? nah enak tuh cilor, apalagi bubuk cabenya yang banyak biar pedesnya nampol.</p>
+<p>Udah sana buru cari abang cilor, beli yang banyak bagi gua sekalian ghahahaha, Ngaco :D. Cilor, dia tuh pengertian banget sama aku. Aku lagi pengen eh cilor selalu ada dikepala aku. Tiba-tiba aku jadi cilor. Makin ngaco gegara laper hahaa.</p>
+<p>WaH sob, kalian sebagai programmer ato orang yang suka sama kode (cieee yang jomblo geer, yang biasa dikode-in) pasti seneng kan kalo ngeliat jomblo itu dibully, ehh maap keceplosan. Kalian pasti seneng sama tampilan editor text kalian yang membuat kode yang kita tulis jadi lebih rapih.</p>
 
 <blockquote class="blockquote">
-    text quote
+    Choose the right editor, and you'll be fine..
 </blockquote>
 
-<p>text content.</p>
-<p>text content.</p>
-<p>text content.</p>
+<p>Kalo kalian perhatiin, di blog ini juga ada sepotong kode yang disisipkan pada beberapa artikel. Silahkan kalian cek, tampilannya menarik bukan? ya seenggaknya saya ngerasa gitu hahaaha. Potongan kode tersebut bisa tampil menarik dan tidak berantakan itu dengan tambahan library javascript yang bisa kita pasang pada website kita.</p>
+<p>Library tersebut adalah Syntaxhighlighter, kalian bisa mendownloadnya langsung di halaman resminya. Hari ini saya akan sharing bagaimana cara memasangnya pada website teman-teman, seperti biasa siapkan mental dan berdoa :D.</p>
 
+<!-- &lt; -->
+<h3>WaH Gulp.js error, instalasi Syntaxhighlighter gagal.</h3>
+
+<p>Oke, langsung aja. Untuk proses pemasangan library ini pada website kita n'ga semudah kliatannya sob, kalo n'ga percaya mari kita buktikan hahahaa.</p>
+<p>Siapkan bahan-bahan sebagai berikut: </p>
+<ul>
+    <ol>Direktori kerja, misal /home/User/Documents .</ol>
+    <ol>Kalo blm ada Git, install terlebih dahulu (skip kalo udah) .</ol>
+    <ol>Kalo blm ada Npm, install terlebih dahulu (skip kalo udah) .</ol>
+</ul>
+
+<p>1. Masuk ke direktori kerja kita, dan eksekusi perintah dibawah.</p> 
+<pre class="brush: bash">
+    git clone https://github.com/syntaxhighlighter/syntaxhighlighter.git
+    cd syntaxhighlighter
+</pre>
 <figure class="figure-img">
-    <img class="img-responsive" src="./image/path" alt="">
-    <figcaption>Image 2</figcaption>
+    <img class="img-responsive" src="./public/uploads/git-clone-syntaxhighlighter.png" alt="">
+    <figcaption>Run git command</figcaption>
 </figure>
 
-<p>text content.</p>
-<p>text content.</p>
-<p>text content.</p>
-
-<!-- encode html entity before using code highlighter -->
-<pre class="brush: java">
-    Map&lt;String, String> v = new HashMap&lt;String, String>();
+<p>2. Selanjutnya install dependency dengan mengeksekusi perintah dibawah, sebelumnya pastikan kita sudah berada di direktori repo git tadi (syntaxhighlighter).</p>
+<pre class="brush: bash">
+    npm install
 </pre>
+<figure class="figure-img">
+    <img class="img-responsive" src="./public/uploads/npm-install-syntaxhiglighter.png" alt="">
+    <figcaption>Npm install</figcaption>
+</figure>
 
-<p>text content.</p>
-<p>text content.</p>
-<p>text content.</p>
+<p>3. Langkah selanjutnya kita akan mempersiapkan setup project dengan menggunakan Gulp.</p>
+<pre class="brush: bash">
+    ./node_modules/gulp/bin/gulp.js setup-project
+</pre>
+<figure class="figure-img">
+    <img class="img-responsive" src="./public/uploads/gulp-js-error-setup-project.png" alt="">
+    <figcaption>Gulp.js setup-project return error</figcaption>
+</figure>
+<p>Waduhhh gawat hahahaha. Ehh kalo gw sih error nih sob, gimana kalian? . Eh tapi jangan panik, ayo kita bismillah cari di google pasti ada caranya. Dan bener aja sob, bisa dibuktikan nih pake cara ini, pertama-tama edit file ./node_modules/songbird/lib/songbird.js (kebetulan dicommand itu saya pake "code" / alias dari visual studio code, tinggal disesuaikan ya :D ).</p>
+<pre class="brush: bash">
+    code ./node_modules/songbird/lib/songbird.js
+</pre>
+<pre class="brush: js">
+    /**
+     * cari baris ini
+     */
+    Promise = global.Promise || require("bluebird");
+    /**
+     * ubah kayak dibawah ini
+     */
+    Promise = require("bluebird");
+</pre>
+<p>Oke harusnya sih udah fixed nih issue nya, kita lanjut mulai dari step 3 ya.</p>
+<pre class="brush: bash">
+    ./node_modules/gulp/bin/gulp.js setup-project
+</pre>
+<figure class="figure-img">
+    <img class="img-responsive" src="./public/uploads/gulp-success.png" alt="">
+    <figcaption>Gulp.js setup-project success</figcaption>
+</figure>
+<p>4. Kalo udah muncul pesan kayak gambar diatas itu, selanjutnya kita build repo tadi.</p>
+<pre class="brush: bash">
+    ./node_modules/gulp/bin/gulp.js build --brushes=all --theme=default
+</pre>
+<p>Sampai tahap 4 ini kita udah sukses compiled (hahaha istilahnya ini kan ya, abis ribet :p) syntaxhighlighter tadi dan sekarang udah siap kita pake nih. Cukup kopi folder dist dan upload ke public direktori web server kalian. </p>
+<p>Ciee sekarang udah bisa nyisipin kode-kode nya tuhh, ciee cieeee :p.<br>
+    See you next time readers, salam tempel.
+</p>
