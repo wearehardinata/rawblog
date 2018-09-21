@@ -1,8 +1,14 @@
 <?php
 $rawdata = [];
 
+/**
+ * Buat variable yang berisikan list bulan dalam 1 tahun
+ */
 $months = array_reduce(range(1,12),function($rslt,$m){ $rslt[$m] = date('F',mktime(0,0,0,$m,10)); return $rslt; });
-// PT Maju Mundur
+
+/**
+ * Let's 
+ */
 foreach ($months as $num => $month) {
     
     // Negara Air
@@ -93,16 +99,35 @@ foreach ($months as $num => $month) {
     }
 }
 
+
+// echo "<pre>";
+// print_r ($rawdata);
+// echo "</pre>";
+// die();
+
+
+/**
+ * Tampung rawdata
+ * ~ per country, company & city per month
+ * Tampung data bantuan
+ * ~ rowspan & company 
+ */
 $data = [];
 $bind = [];
 foreach ($rawdata as $key => $value) {
     $month = (int) date('m', strtotime($value['update']));
     $data[$value['negara']][$value['company']][$value['city']][$month]['incident'] += 1;
 
+    // simpan sementara untuk mencari rowspan Caountry
     $bind['country'][$value['negara']][$value['company']][$value['city']] = 1;
+    
+    // simpan sementara untuk mencari rowspan Company
     $bind['companies'][$value['negara']][$value['company']][$value['city']] += 1;
 }
 
+/**
+ * Hitung rowspan per Country
+ */
 $rowspanCountry = array();
 foreach ($bind['country'] as $country => $companies) {
     foreach ($companies as $key => $cities) {
@@ -167,11 +192,10 @@ foreach ($bind['country'] as $country => $companies) {
                         
                         <?php foreach($months as $num => $month):?>
                             <?php $incident = isset($monthly[$num]) ? $monthly[$num]['incident'] : 0;?>
-                            <?php $mttr = isset($monthly[$num]) ? $monthly[$num]['mttr'] : 0;?>
                             
                             <td style="width: 3%; vertical-align: top; text-align: center;"><?=$incident;?></td>
                             <td style="width: 3%; vertical-align: top; text-align: center;">0</td>
-                            <td style="width: 3%; vertical-align: top; text-align: center;"><?=$mttr;?></td>
+                            <td style="width: 3%; vertical-align: top; text-align: center;">0</td>
                         <?php endforeach;?>
                         
                     </tr> <!-- tr disini sukses kalo cuma 1 third party -->
