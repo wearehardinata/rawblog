@@ -1,87 +1,45 @@
-<h3>Versioning Control System, mengenal Git (GitHub / GitLab)</h3>
+<h3>Push, commit github tanpa username dan password</h3>
 
 <p>
-    Ohaiyou, mina. hahahaha akibat anime nih, abisnya denger seiyu nya ngomong itu rasanya gimana gitu yaa.
-    Imut-imut gitu suaranya, ehh yang gw maksud itu seiyu cewek yaa :p.
-    Btw sob, kalian pada suka nonton anime juga kan?? anime apa nih rekomendasi kalian.
-    Ada satu anime yang terus-terusan gw tonton gak bosen-bosen, ya kalo kalian udah pernah nonton gw yakin kalian pasti suka juga nih.
-    Yup, oregairu. Dari alur cerita -nya seru sob, bisa kalian cek dah sono.
-</p>
-<p>
-    Lohh kok anime yang dibahas hahahaa. Oh iya nih, kalian udah pada tau Git kan??
-    Pertanyaannya sih harusnya kalian make Git n'ga buat develop. Nah sekarang nih gw jg baru mau nerapin make Git nih, jadi lebih seru nih ngodingnya.
-    Untuk penggunaan Git ini sendiri bisa local maupun harus terkoneksi ke internet, tapi menurut gw sih ya perlu konek ke internet aja. Jadi sewaktu-waktu bisa clone dari mana aja, orang-orang jg bisa kontribusi jadinya.
-    Hahhaa siapa tau bikin killer apps, ya kan.
-</p>
-<blockquote class="blockquote">
-    Wanita itu terbuat dari gula, rempah-rempah dan hal indah lainnya
-</blockquote>
-<p>
-    Ups, maksudnya lokal disini ya kalian config git cuma di lokal pc kalian aja. 
-    Gabisa diakses dari tempat lain, nah kalo yang konek internet tuh lebih ke arah penyedia jasa host git (gatau ini istilahnya bener apa kagak :D) macem GitHub, GitLab dan lain-lain.
-    Gimana? udah kebayang lah ya. GitHub dan GitLab memberikan akses gratis bagi penggunanya, jadi kita bisa daftar tanpa takut kena tagihan nantinya (ya daftarnya jg mesti yang free lohh ya :p).
+    Halloo, alhamdulillah masih bisa nulis lagi nih.
+    Gimana kabar kalian sob?? sehat semua kan? semoga kita selalu diberikan yang terbaik oleh-Nya.
+    Kali ini saya mau melanjutkan tutorial <a href="/git-tutorial-menambahkan-lokal-repo-ke-remote-server">sebelumnya</a> nih, sebelumnya itu kita udah konfigurasi repo lokal kita dan repo di github/gitlab.
+    Nah untuk kali ini saya mau nambahin dikit nih tutorial agar kita gak perlu di suruh masukin username & password sewaktu push, atau pull repo kita yang di GitHub/GitLab.
 </p>
 
-<h3>Git, push and commit</h3>
 <p>
-    Langsung aja, buat yang belom punya akun (GitHub / GitLab) silahkan daftar dahulu.
-    Santai aja, gampang kok daftarnya. Habis daftar jangan lupa kita buat repo baru, kasih nama repo -nya terserah kalian sob.
+    1. Kita clone repo kita yang udah di host di GitHub/GitLab 
 </p>
+<pre class="brush: bash">
+    git clone https://github.com/user/repo.git Latihan\ Git
+</pre>
+
+<p>
+    2. Selanjutnya kita generate ssh keys pc kita
+</p>
+<pre class="brush: bash">
+    ssh-keygen
+</pre>
 <figure class="figure-img">
-    <a href="" data-fancybox="images" data-caption="Create new repository">
-        <img class="img-responsive" src="./public/uploads/create-github-repo.png" alt="">
+    <a href="" data-fancybox="images" data-caption="Create new deploy key on GitHub">
+        <img class="img-responsive" src="./public/uploads/ssh-keygen.png" alt="">
     </a>
-    <figcaption>Create new repository</figcaption>
+    <figcaption>Create ssh keys</figcaption>
 </figure>
+
 <p>
-    Selanjutnya kita siapkan juga direktori kerja kita, buat direktori Latihan Git, lalu masuk direktori tersebut.
+    3. Ketik perintah dibawah, copy ssh keys yang ditampilkan dan daftarkan pada GitHub/GitLab
 </p>
 <pre class="brush: bash">
-    mkdir Latihan\ Git
-    cd Latihan\ Git
-    code .
+    cat /root/.ssh/id_rsa.pub
 </pre>
+<figure class="figure-img">
+    <a href="" data-fancybox="images" data-caption="Create new deploy key on GitHub">
+        <img class="img-responsive" src="./public/uploads/tambah-ssh-keys-github.png" alt="">
+    </a>
+    <figcaption>Create new deploy key on GitHub</figcaption>
+</figure>
+
 <p>
-    Pada direktori ini kita coba buat file baru, simpan dan beri nama index.php (atau nama apa aja terserah kamuu :D).
-    Selanjutnya, kita jalankan perintah dibawah.
-    Perintah ini akan membuat direktori kerja kita dikenal sebagai local git repositori.
+    Sampai point ke- 3 ini harusnya tidak ada masalah, alias nanti ketika kita push atau pull dari dan ke GitHub kita ga perlu masukin username atau password lagi.
 </p>
-<pre class="brush: bash">
-    git init
-</pre>
-<p>
-    Lohh kok cuma segitu?? hehehe iya cukup ini aja si Git udah ngerti kok, gak kayak kamuu gak peka-peka :p.
-    Perintah diatas akan mendaftarkan direktori kerja kita beserta file didalamnya kedalam repo local git kita.
-    Lalu agar repo kita sync dengan yang udah kita buat di GitHub/GitLab tadi, kita jalankan perintah dibawah.
-</p>
-<pre class="brush: bash">
-    git remote add origin https://github.com/user/repo.git
-</pre>
-
-
-<p>text content.</p>
-<p>text content.</p>
-<p>text content.</p>
-
-<blockquote class="blockquote">
-    text quote
-</blockquote>
-
-<p>text content.</p>
-<p>text content.</p>
-<p>text content.</p>
-
-
-
-<p>text content.</p>
-<p>text content.</p>
-<p>text content.</p>
-
-<!-- encode html entity before using code highlighter -->
-<pre class="brush: java">
-    Map&lt;String, String> v = new HashMap&lt;String, String>();
-</pre>
-
-<p>text content.</p>
-<p>text content.</p>
-<p>text content.</p>
